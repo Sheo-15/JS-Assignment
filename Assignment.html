@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FWD Assignment 4</title>
+
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        button {
+            background-color: white;
+            color: black;
+            border: 2px solid black;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Assignment 4</h1>
+
+<button onclick="q1()">Question 1</button>
+<button onclick="q2()">Question 2</button>
+<button onclick="q3()">Question 3</button>
+<button onclick="q4()">Question 4</button>
+<button onclick="q5()">Question 5</button>
+<button onclick="q6()">Question 6</button>
+
+<script>
+
+// (same JS code as before — no changes needed)
+
+// ------------------ Q1 ------------------
+function isPrime(n) {
+    if (n < 2) return false;
+    for (let i = 2; i * i <= n; i++) {
+        if (n % i === 0) return false;
+    }
+    return true;
+}
+
+function q1() {
+    let L = parseInt(prompt("Enter L (start):"));
+    let R = parseInt(prompt("Enter R (end):"));
+    let K = parseInt(prompt("Enter K:"));
+
+    let count = 0;
+
+    for (let x = L; x <= R; x++) {
+        if (x % K === 0 && !x.toString().includes('0')) {
+            let sum = 0, temp = x;
+
+            while (temp > 0) {
+                sum += temp % 10;
+                temp = Math.floor(temp / 10);
+            }
+
+            if (isPrime(sum)) count++;
+        }
+    }
+
+    alert("Count: " + count);
+}
+
+// ------------------ Q2 ------------------
+function q2() {
+    let N = parseInt(prompt("Enter N:"));
+    let seed = parseInt(prompt("Enter seed:"));
+
+    let current = N;
+
+    for (let i = 0; i < 3; i++) {
+        if (current % 2 === 0) current = current / 2 + seed;
+        else current = current * 3 - seed;
+    }
+
+    let str = current.toString();
+
+    if (current >= 100 && current <= 999 && str[1] == seed) {
+        alert("YES, " + current);
+    } else {
+        alert("NO, " + current);
+    }
+}
+
+// ------------------ Q3 ------------------
+function isPalindrome(num) {
+    let s = num.toString();
+    return s === s.split('').reverse().join('');
+}
+
+function q3() {
+    let N = parseInt(prompt("Enter N:"));
+    let K = parseInt(prompt("Enter K:"));
+
+    let ans = -1;
+
+    for (let X = 0; X <= 100000; X++) {
+        let val = N + X;
+
+        if (isPalindrome(val) && val % K === 0) {
+            ans = X;
+            break;
+        }
+    }
+
+    alert("X = " + ans);
+}
+
+// ------------------ Q4 ------------------
+function q4() {
+    let base = parseInt(prompt("Enter base:"));
+    let distance = parseInt(prompt("Enter distance:"));
+    let minutesLate = parseInt(prompt("Enter minutes late:"));
+    let seed = parseInt(prompt("Enter seed:"));
+
+    let fare = base + 7 * distance;
+
+    if (minutesLate > 15) fare += 20;
+    if (distance > 10) fare += Math.floor(fare * 0.10);
+
+    if (seed % 2 === 1) fare -= seed;
+    else fare += seed;
+
+    fare = Math.ceil(fare / 5) * 5;
+
+    alert("Final Fare: " + fare);
+}
+
+// ------------------ Q5 ------------------
+function q5() {
+    let N = parseInt(prompt("Enter N:"));
+    let seed = parseInt(prompt("Enter seed:"));
+
+    let m = 0, sum = 0;
+    let d = seed + 2;
+
+    while (sum < N) {
+        m++;
+        if (m % d !== 0) sum += m;
+    }
+
+    alert("m = " + m + ", sum = " + sum);
+}
+
+// ------------------ Q6 ------------------
+function q6() {
+    let a = parseInt(prompt("Enter a:"));
+    let b = parseInt(prompt("Enter b:"));
+    let c = parseInt(prompt("Enter c:"));
+
+    let score = 3 * a + b - 2 * c;
+
+    if (score < 0) score = 0;
+    if (a + b + c > 50) score -= 10;
+
+    let status = (score >= 60) ? "PASS" : "FAIL";
+
+    alert("Score: " + score + ", Status: " + status);
+}
+
+</script>
+
+</body>
+</html>
