@@ -21,7 +21,6 @@ if (seed % 2 === 1) {
     fare += seed;
 }
 
-// Round up to nearest multiple of 5
 fare = Math.ceil(fare / 5) * 5;
 
 alert("Final Fare: " + fare);
